@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Snack Paws — Snacks naturales y deshidratados para perros. Sin conservadores, sin aditivos. Puro amor natural en cada bocado." />
+  <meta name="theme-color" content="#3c1a0c" />
+  <title>KENZO SNACK 🐾 — Snacks Naturales para Perros</title>
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="KENZO SNACK — Snacks Naturales para Perros" />
+  <meta property="og:description" content="Snacks deshidratados naturales. Sin conservadores. Puro amor en cada bocado." />
+  <meta property="og:type" content="website" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Favicon emoji -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐾</text></svg>" />
+
+  <link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+
+<!-- ─── TOAST CONTAINER ──────────────────────────────────── -->
+<div class="toast-container" id="toastContainer" aria-live="polite"></div>
+
+<!-- ─── NAVBAR ───────────────────────────────────────────── -->
+<nav class="navbar" id="navbar" role="navigation" aria-label="Navegación principal">
+  <div class="container">
+    <div class="nav-inner">
+      <!-- Logo -->
+      <a href="#inicio" class="nav-logo" aria-label="Snack Paws - Inicio">
+        <div class="nav-logo-icon" aria-hidden="true"><img src="images/Logo.PNG"></div>
+        <span class="nav-logo-text">KENZO SNACK</span>
+      </a>
+
+      <!-- Links -->
+      <ul class="nav-links" id="navLinks" role="list">
+        <li><a href="#inicio" class="nav-link">Inicio</a></li>
+        <li><a href="#productos" class="nav-link">Productos</a></li>
+        <li><a href="#nosotros" class="nav-link">Nosotros</a></li>
+        <li><a href="#ubicacion" class="nav-link">Ubicación</a></li>
+      </ul>
+
+      <!-- Actions -->
+      <div style="display:flex;align-items:center;gap:12px;">
+        <button class="cart-btn" id="cartBtn" aria-label="Abrir carrito de compras">
+          <span aria-hidden="true">🛒</span>
+          <span>Carrito</span>
+          <span class="cart-badge" id="cartCount" aria-label="productos en carrito">0</span>
+        </button>
+        <button class="hamburger" id="hamburger" aria-label="Menú" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ─── HERO ─────────────────────────────────────────────── -->
+<section class="hero" id="inicio" aria-label="Sección principal">
+  <!-- Animated blobs -->
+  <div class="hero-blob hero-blob-1" aria-hidden="true"></div>
+  <div class="hero-blob hero-blob-2" aria-hidden="true"></div>
+  <div class="hero-blob hero-blob-3" aria-hidden="true"></div>
+
+  <!-- Paw decorations -->
+  <div class="hero-paws" id="heroPaws" aria-hidden="true"></div>
+
+  <!-- Content -->
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-eyebrow" aria-label="Categoría">
+        <span>🐕</span>
+        <span>100% Natural · Sin Conservadores</span>
+      </div>
+
+      <h1 class="hero-title">
+        Snacks que tu perro
+        <em>simplemente ama.</em>
+      </h1>
+
+      <p class="hero-subtitle">
+        Deshidratados naturalmente, sin aditivos ni conservadores artificiales.
+        El mejor premio para tu mejor amigo.
+      </p>
+
+      <div class="hero-cta-group">
+        <a href="#productos" class="btn-primary">
+          <span>Ver Productos</span>
+          <span>→</span>
+        </a>
+        <a href="#ubicacion" class="btn-outline">
+          <span>📍 Nuestra Tienda</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating Visual Card -->
+  <div class="hero-visual" aria-hidden="true">
+    <div class="hero-visual-card">
+      <span class="hero-visual-emoji">🦴</span>
+      <div class="hero-visual-label">Tráquea de Res</div>
+      <span class="hero-visual-tag">⭐ Más vendido</span>
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="hero-scroll" aria-hidden="true">
+    <div class="scroll-line"></div>
+    <span>Explorar</span>
+  </div>
+</section>
+
+<!-- ─── STATS BAR ─────────────────────────────────────────── -->
+<div class="stats-bar" role="region" aria-label="Estadísticas">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-item">
+        <span class="stat-number" data-target="500" data-suffix="+">0+</span>
+        <span class="stat-label">Perritos felices</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number" data-target="8" data-suffix="">0</span>
+        <span class="stat-label">Snacks naturales</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number" data-target="100" data-suffix="%">0%</span>
+        <span class="stat-label">Sin conservadores</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number" data-target="5" data-suffix="★">0★</span>
+        <span class="stat-label">Calificación promedio</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── PRODUCTOS ─────────────────────────────────────────── -->
+<section class="products-section" id="productos" aria-label="Catálogo de productos">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-tag">🍖 Nuestro Menú</div>
+      <h2 class="section-title">Snacks <span>naturales</span><br>para cada perrito</h2>
+      <p class="section-sub">Elaborados con ingredientes de primera calidad, deshidratados lentamente para preservar todos los nutrientes.</p>
+    </div>
+
+    <!-- Filter Tabs -->
+    <div class="filter-tabs reveal reveal-delay-1" role="tablist" aria-label="Filtrar productos">
+      <button class="filter-tab active" data-filter="todos" role="tab" aria-selected="true">🐾 Todos</button>
+      <button class="filter-tab" data-filter="aves" role="tab" aria-selected="false">🍗 Aves</button>
+      <button class="filter-tab" data-filter="res" role="tab" aria-selected="false">🐄 Res</button>
+      <button class="filter-tab" data-filter="cerdo" role="tab" aria-selected="false">🐷 Cerdo</button>
+    </div>
+
+    <!-- Grid -->
+    <div class="products-grid" id="productsGrid" role="list" aria-label="Lista de productos"></div>
+  </div>
+</section>
+
+<!-- ─── NOSOTROS / FEATURES ───────────────────────────────── -->
+<section class="features-section" id="nosotros" aria-label="Sobre Snack Paws">
+  <div class="container">
+    <div class="section-header reveal" style="color:var(--ivory);">
+      <div class="section-tag" style="background:rgba(228,191,101,.15);border-color:rgba(228,191,101,.2);color:var(--gold-light);">
+        🐾 ¿Por qué Snack Paws?
+      </div>
+      <h2 class="section-title" style="color:var(--ivory);">
+        Amor natural en <span style="color:var(--gold);">cada bocado</span>
+      </h2>
+      <p class="section-sub" style="color:rgba(246,235,203,.65);">
+        Creemos que los perros merecen lo mejor. Por eso cada snack es elaborado con ingredientes reales, sin trucos.
+      </p>
+    </div>
+
+    <div class="features-grid">
+      <div class="feature-card reveal reveal-delay-1">
+        <span class="feature-icon">🌿</span>
+        <h3 class="feature-title">100% Natural</h3>
+        <p class="feature-desc">Sin conservadores artificiales, sin colorantes, sin saborizantes. Solo ingredientes reales que reconoces.</p>
+      </div>
+      <div class="feature-card reveal reveal-delay-2">
+        <span class="feature-icon">🔥</span>
+        <h3 class="feature-title">Deshidratación Lenta</h3>
+        <p class="feature-desc">Proceso artesanal que preserva todos los nutrientes, enzimas y el sabor natural que enloquece a los perritos.</p>
+      </div>
+      <div class="feature-card reveal reveal-delay-3">
+        <span class="feature-icon">🦷</span>
+        <h3 class="feature-title">Salud Dental</h3>
+        <p class="feature-desc">Muchos de nuestros snacks ayudan naturalmente a limpiar dientes y encías mientras tu perro los disfruta.</p>
+      </div>
+      <div class="feature-card reveal reveal-delay-4">
+        <span class="feature-icon">🐶</span>
+        <h3 class="feature-title">Para Todo Tamaño</h3>
+        <p class="feature-desc">Tenemos opciones para razas pequeñas, medianas y grandes. Cada perro merece su snack perfecto.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── TESTIMONIOS ───────────────────────────────────────── -->
+<section class="testimonials-section" aria-label="Testimonios de clientes">
+  <div class="container">
+    <div class="section-header reveal" style="margin-bottom:48px;">
+      <div class="section-tag">💬 Reseñas</div>
+      <h2 class="section-title">Lo que dicen los <span>dueños</span></h2>
+    </div>
+  </div>
+
+  <div style="overflow:hidden;">
+    <div class="testimonials-track" id="testimonialsTrack" aria-label="Carrusel de testimonios"></div>
+  </div>
+</section>
+
+<!-- ─── UBICACIÓN ─────────────────────────────────────────── -->
+<section class="location-section" id="ubicacion" aria-label="Información de contacto y ubicación">
+  <div class="container">
+    <div class="location-inner">
+      <div class="location-text reveal">
+        <div class="section-tag">📍 Encuéntranos</div>
+        <h2>Visítanos en <em>nuestra tienda</em></h2>
+        <p>Ven a conocernos y deja que tu perrito elija su snack favorito. También hacemos envíos a domicilio.</p>
+
+        <ul class="contact-list" role="list">
+          <li>
+            <div class="contact-icon" aria-hidden="true">📍</div>
+            <div>
+              <strong>Dirección</strong><br>
+              <span style="color:var(--brown-mid);">Calle Ejemplo #123, Col. Centro<br>Ciudad de México, CP 06000</span>
+            </div>
+          </li>
+          <li>
+            <div class="contact-icon" aria-hidden="true">📞</div>
+            <div>
+              <strong>Teléfono / WhatsApp</strong><br>
+              <a href="https://wa.me/5512345678" style="color:var(--brown-mid);text-decoration:none;" target="_blank" rel="noopener">55 1234 5678</a>
+            </div>
+          </li>
+          <li>
+            <div class="contact-icon" aria-hidden="true">📧</div>
+            <div>
+              <strong>Email</strong><br>
+              <a href="mailto:hola@snackpaws.mx" style="color:var(--brown-mid);text-decoration:none;">hola@snackpaws.mx</a>
+            </div>
+          </li>
+          <li>
+            <div class="contact-icon" aria-hidden="true">🕐</div>
+            <div>
+              <strong>Horario</strong><br>
+              <span style="color:var(--brown-mid);">Lun–Vie: 9am–7pm · Sáb: 10am–5pm</span>
+            </div>
+          </li>
+        </ul>
+
+        <div style="margin-top:32px;">
+          <button class="btn-primary" id="cartBtn2" style="font-size:14px;padding:14px 28px;">
+            🛒 Hacer un Pedido
+          </button>
+        </div>
+      </div>
+
+      <div class="map-placeholder reveal reveal-delay-2" role="img" aria-label="Mapa de ubicación de Snack Paws">
+        <span class="map-pin-emoji">📍</span>
+        <div class="map-address">Snack Paws</div>
+        <div class="map-detail">Calle Ejemplo #123, Col. Centro<br>Ciudad de México</div>
+        <div class="schedule-grid" role="list">
+          <div class="schedule-item" role="listitem">
+            <div class="schedule-day">Lun – Vie</div>
+            <div class="schedule-time">9:00 – 19:00</div>
+          </div>
+          <div class="schedule-item" role="listitem">
+            <div class="schedule-day">Sábado</div>
+            <div class="schedule-time">10:00 – 17:00</div>
+          </div>
+          <div class="schedule-item" role="listitem">
+            <div class="schedule-day">Domingo</div>
+            <div class="schedule-time">Cerrado</div>
+          </div>
+          <div class="schedule-item" role="listitem">
+            <div class="schedule-day">Festivos</div>
+            <div class="schedule-time">Consultar</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ────────────────────────────────────────────── -->
+<footer role="contentinfo">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <span>🐾</span>
+          <span>Snack Paws</span>
+        </div>
+        <p>Snacks naturales para perros felices. Sin conservadores, sin mentiras. Solo amor en cada bocado.</p>
+        <div class="social-links" aria-label="Redes sociales">
+          <a href="#" class="social-link" aria-label="Instagram">📸</a>
+          <a href="#" class="social-link" aria-label="Facebook">📘</a>
+          <a href="https://wa.me/5512345678" class="social-link" aria-label="WhatsApp" target="_blank" rel="noopener">💬</a>
+          <a href="#" class="social-link" aria-label="TikTok">🎵</a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Productos</h4>
+        <ul>
+          <li><a href="#productos">Aves</a></li>
+          <li><a href="#productos">Res</a></li>
+          <li><a href="#productos">Cerdo</a></li>
+          <li><a href="#productos">Ver todo</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Información</h4>
+        <ul>
+          <li><a href="#nosotros">Sobre nosotros</a></li>
+          <li><a href="#ubicacion">Contacto</a></li>
+          <li><a href="#ubicacion">Dónde encontrarnos</a></li>
+          <li><a href="https://wa.me/5512345678" target="_blank" rel="noopener">WhatsApp</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2025 Snack Paws. Todos los derechos reservados.</p>
+      <p>Hecho con ❤️ para los mejores amigos del mundo 🐾</p>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══════════════════════════════════════════════════════════
+     CART SIDEBAR
+═══════════════════════════════════════════════════════════ -->
+<div class="cart-overlay" id="cartOverlay" aria-hidden="true"></div>
+<aside class="cart-sidebar" id="cartSidebar" role="dialog" aria-label="Carrito de compras" aria-modal="true">
+  <div class="cart-header">
+    <div class="cart-title">
+      <span>🛒</span>
+      <span>Tu Carrito</span>
+    </div>
+    <button class="cart-close" id="cartClose" aria-label="Cerrar carrito">✕</button>
+  </div>
+
+  <div class="cart-items" id="cartItems" role="list">
+    <div class="cart-empty">
+      <span class="cart-empty-emoji">🛒</span>
+      <p>Tu carrito está vacío.<br>¡Agrega algunos snacks!</p>
+    </div>
+  </div>
+
+  <div class="cart-footer">
+    <div class="cart-subtotal">
+      <span class="cart-subtotal-label">Total del pedido</span>
+      <span class="cart-subtotal-amount" id="cartSubtotal">$0.00 MXN</span>
+    </div>
+    <button class="checkout-btn" id="checkoutBtn" aria-label="Proceder al pago">
+      <span>Pedir Ahora</span>
+      <span>→</span>
+    </button>
+  </div>
+</aside>
+
+<!-- ═══════════════════════════════════════════════════════════
+     ORDER MODAL
+═══════════════════════════════════════════════════════════ -->
+<div class="modal-overlay" id="modalOverlay" role="dialog" aria-label="Formulario de pedido" aria-modal="true">
+  <div class="modal" id="modal">
+    <div class="modal-header">
+      <div class="modal-title">🐾 Confirmar Pedido</div>
+      <div class="modal-subtitle">Llena tus datos y te contactamos enseguida</div>
+    </div>
+
+    <!-- Form Container -->
+    <div id="orderFormContainer">
+      <div class="modal-body">
+        <!-- Order Summary -->
+        <div class="order-summary" role="region" aria-label="Resumen de pedido">
+          <div class="order-summary-title">📦 Tu pedido</div>
+          <div id="orderSummaryItems"></div>
+          <div class="order-summary-total" id="orderSummaryTotal"></div>
+        </div>
+
+        <!-- Form -->
+        <form id="orderForm" novalidate aria-label="Formulario de datos de contacto">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="customerName">Nombre completo *</label>
+              <input
+                type="text"
+                id="customerName"
+                class="form-input"
+                placeholder="Tu nombre"
+                required
+                autocomplete="name"
+              />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="customerPhone">Teléfono / WhatsApp *</label>
+              <input
+                type="tel"
+                id="customerPhone"
+                class="form-input"
+                placeholder="55 1234 5678"
+                required
+                autocomplete="tel"
+              />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="customerEmail">Correo electrónico *</label>
+            <input
+              type="email"
+              id="customerEmail"
+              class="form-input"
+              placeholder="tuemail@ejemplo.com"
+              required
+              autocomplete="email"
+            />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="orderNotes">Notas del pedido (opcional)</label>
+            <textarea
+              id="orderNotes"
+              class="form-textarea"
+              placeholder="Instrucciones especiales, preferencias de entrega, raza y tamaño de tu perro..."
+            ></textarea>
+          </div>
+
+          <p style="font-size:12px;color:var(--brown-light);margin-bottom:16px;line-height:1.5;">
+            🔒 Tus datos son seguros. Al enviar recibirás un correo de confirmación y nos pondremos en contacto contigo para coordinar la entrega.
+          </p>
+
+          <div style="display:flex;gap:12px;justify-content:flex-end;margin-bottom:8px;">
+            <button type="button" id="closeModal" class="btn-outline" style="font-size:14px;padding:12px 24px;color:var(--brown-mid);border-color:var(--cream);">
+              Cancelar
+            </button>
+            <button type="submit" class="submit-btn" id="submitBtn" style="flex:1;">
+              <span>🛒</span> Confirmar Pedido
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Success Screen -->
+    <div id="successScreen" style="display:none;" class="modal-body">
+      <div class="success-screen">
+        <span class="success-emoji">🎉</span>
+        <h2 class="success-title">¡Pedido recibido!</h2>
+        <p class="success-text">
+          Gracias por tu confianza. Revisa tu correo electrónico para ver la confirmación de tu pedido.<br><br>
+          Nos pondremos en contacto contigo a la brevedad para coordinar la entrega. 🐾
+        </p>
+        <button class="btn-primary" id="successCloseBtn" style="margin:0 auto;">
+          ¡Perfecto! Seguir comprando
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="/js/script.js"></script>
+</body>
+</html>
