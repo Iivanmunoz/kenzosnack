@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pago Pendiente — Snack Paws 🐾</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐾</text></svg>"/>
+  <style>
+    :root { --cream:#f6ebcb; --gold:#e4bf65; --ivory:#fcf8ee; --brown:#3c1a0c; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'DM Sans', sans-serif; background: var(--ivory);
+      min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px;
+    }
+    .card {
+      background: #fff; border-radius: 24px; padding: 56px 48px; max-width: 480px; width: 100%;
+      text-align: center; box-shadow: 0 24px 64px rgba(60,26,12,.15); border: 1px solid rgba(228,191,101,.2);
+    }
+    .icon { font-size: 80px; display: block; margin-bottom: 20px; animation: pulse 2s ease-in-out infinite; }
+    @keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.08); } }
+    h1 { font-family: 'Playfair Display', serif; font-size: 32px; color: var(--brown); margin-bottom: 12px; }
+    p { color: #6b4226; line-height: 1.7; margin-bottom: 20px; font-size: 15px; }
+    .badge {
+      background: #fff3cd; border: 1px solid #ffc107; color: #856404;
+      padding: 10px 20px; border-radius: 50px; font-weight: 600; font-size: 14px;
+      display: inline-block; margin-bottom: 28px;
+    }
+    .info-box {
+      background: var(--cream); border-radius: 12px; padding: 16px 20px;
+      margin-bottom: 28px; text-align: left;
+    }
+    .info-box p { margin: 6px 0; font-size: 14px; color: var(--brown); }
+    a.btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--brown); color: var(--gold); text-decoration: none;
+      font-weight: 700; font-size: 15px; padding: 14px 32px;
+      border-radius: 50px; transition: all .3s;
+    }
+    a.btn:hover { background: #5a2710; transform: translateY(-2px); }
+    .footer-note { font-size: 12px; color: #aaa; margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <span class="icon">⏳</span>
+    <div class="badge">🕐 Pago en proceso</div>
+    <h1>Tu pago está pendiente</h1>
+    <p>
+      Mercado Pago está procesando tu pago. Esto puede tardar unos minutos dependiendo del método de pago que elegiste.
+    </p>
+
+    <div class="info-box">
+      <p>📧 Recibirás un email de confirmación cuando el pago sea aprobado.</p>
+      <p>📞 También puedes contactarnos si tienes dudas: <strong>55 1234 5678</strong></p>
+    </div>
+
+    <p style="font-size:13px;color:#aaa;">
+      Los pagos en efectivo (OXXO, tiendas de conveniencia) pueden tardar hasta 24 horas en procesarse.
+    </p>
+
+    <a href="/" class="btn">← Regresar a la tienda</a>
+    <p class="footer-note">Snack Paws — Amor natural en cada bocado 🐾</p>
+  </div>
+</body>
+</html>

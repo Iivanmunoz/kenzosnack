@@ -1,24 +1,9 @@
 /* ============================================================
-   SNACK PAWS — JavaScript Principal (Con Mercado Pago)
+   SNACK PAWS — JavaScript Principal
    Cart, Animaciones, Pedidos
    ============================================================ */
 
 'use strict';
-
-// ─── Configuración Mercado Pago ─────────────────────────────
-// IMPORTANTE: Reemplaza 'TEST-...' con tu Public Key real de Mercado Pago.
-const MP_PUBLIC_KEY = 'TEST-00000000-0000-0000-0000-000000000000';
-let mp;
-
-try {
-  // Inicializamos el SDK
-  // Asegúrate de haber incluido <script src="https://sdk.mercadopago.com/js/v2"></script> en tu HTML
-  mp = new MercadoPago(MP_PUBLIC_KEY, {
-    locale: 'es-MX'
-  });
-} catch (e) {
-  console.error('No se pudo inicializar Mercado Pago. Verifica tu Public Key y conexión.', e);
-}
 
 // ─── Estado Global ───────────────────────────────────────────
 let cart = [];
@@ -367,7 +352,16 @@ const openModal = () => {
     showToast('Agrega productos primero', '⚠️');
     return;
   }
+
+    const user = JSON.parse(localStorage.getItem('kenzo_user') || 'null');
+  if (!user) {
+    showToast('Debes iniciar sesión para comprar 🐾', '🔐');
+    setTimeout(() => window.location.href = '/login.html', 1500);
+    return;
+  }
+  
   closeCart();
+  initStripe();
   populateOrderSummary();
   $modalOverlay.classList.add('open');
   document.body.style.overflow = 'hidden';
@@ -419,42 +413,65 @@ orderForm?.addEventListener('submit', async (e) => {
     items: cart.map(i => ({
       id: i.id, name: i.name, emoji: i.emoji,
       price: i.price, qty: i.qty, unit: i.unit,
-      desc: i.desc // Agregado para MP
     })),
     total: getTotal(),
   };
 
   // Loading state
   submitBtn.disabled = true;
-  submitBtn.innerHTML = `<span class="spinner">⏳</span> Generando pago...`;
+  submitBtn.innerHTML = `<span class="spinner"></span> Conectando con Mercado Pago...`;
 
   try {
-    // 1. Solicitamos la preferencia al backend
-    const res = await fetch('/api/create_preference', {
+    // Creamos la preferencia de pago en el servidor
+    const { paymentMethod, error } = await stripeInstance.createPaymentMethod({
+      type: 'card',
+      card: stripeCardElement,
+      billing_details: { name: customerName, email: customerEmail, phone: customerPhone }
+    });
+    if (error) { showError(error.message); return; }
+
+    const res = await fetch('/api/stripe-charge', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload),
+      headers: { 'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('kenzo_token')}` },
+      body: JSON.stringify({
+        paymentMethodId: paymentMethod.id,
+        customerName, customerEmail: user.email, customerPhone,
+        customerAddress: document.getElementById('customerAddress').value,
+        petName: document.getElementById('petName').value,
+        petBreed: document.getElementById('petBreed').value,
+        petSize: document.getElementById('petSize').value,
+        notes: document.getElementById('orderNotes').value,
+        items, total
+      })
     });
 
     const data = await res.json();
 
-    if (data.init_point) {
-      // 2. Redirigimos a Mercado Pago
-      showToast('Redirigiendo a Mercado Pago...', '💳');
-      setTimeout(() => {
-        window.location.href = data.init_point;
-      }, 1500);
-      
-    } else {
-      throw new Error(data.message || 'Error al crear la preferencia de pago.');
-    }
+    if (data.success && data.checkoutUrl) {
+      // Mostramos pantalla de transición antes de redirigir a MP
+      document.getElementById('orderFormContainer').style.display = 'none';
+      document.getElementById('redirectingScreen').style.display = 'block';
 
+      // Redirigimos al checkout de Mercado Pago después de un breve momento
+      setTimeout(() => {
+        window.location.href = data.checkoutUrl;
+      }, 1800);
+    } else {
+      throw new Error(data.message || 'No se pudo conectar con Mercado Pago.');
+    }
   } catch (err) {
-    console.error(err);
-    showToast('Error al iniciar el pago. Intenta de nuevo.', '❌');
+    showToast(err.message || 'Error al conectar. Intenta de nuevo.', '❌');
     submitBtn.disabled = false;
-    submitBtn.innerHTML = `Pagar con Mercado Pago 💳`;
+    submitBtn.innerHTML = `🏦 Pagar con Mercado Pago`;
   }
+});
+
+document.getElementById('successCloseBtn')?.addEventListener('click', () => {
+  document.getElementById('orderFormContainer').style.display = 'block';
+  document.getElementById('successScreen').style.display = 'none';
+  orderForm.reset();
+  closeModal();
 });
 
 // ─── Testimonials Auto-Clone ─────────────────────────────────
@@ -527,6 +544,26 @@ document.addEventListener('keydown', (e) => {
     else if (cartOpen) closeCart();
   }
 });
+// ─── Stripe Init ─────────────────────────────────────────────
+let stripeCardElement = null;
+let stripeInstance = null;
+
+const initStripe = () => {
+  if (stripeInstance) return;
+  stripeInstance = Stripe('pk_test_TU_PUBLISHABLE_KEY'); // ← tu key de Stripe
+  const elements = stripeInstance.elements();
+  stripeCardElement = elements.create('card', {
+    style: {
+      base: { color: '#3c1a0c', fontFamily: '"DM Sans", sans-serif', fontSize: '15px',
+              '::placeholder': { color: '#9b6b3e' } },
+      invalid: { color: '#e53e3e' }
+    }
+  });
+  stripeCardElement.mount('#stripe-card-element');
+  stripeCardElement.on('change', e => {
+    document.getElementById('stripe-card-errors').textContent = e.error?.message || '';
+  });
+};
 
 // ─── Init ────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {

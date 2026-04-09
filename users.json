@@ -1,0 +1,10 @@
+[
+  {
+    "id": "user_1775710978080",
+    "name": "ivan tarantino",
+    "email": "hesovo2023@kobace.com",
+    "passwordHash": "$2b$10$R41nhCiyIC6G3tXKjqAAdeTuPpmB/NbjUTHlsjuc23FE1DW.AF24W",
+    "role": "client",
+    "createdAt": "2026-04-09T05:02:58.080Z"
+  }
+]

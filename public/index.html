@@ -8,7 +8,7 @@
   <title>KENZO SNACK 🐾 — Snacks Naturales para Perros</title>
 
   <!-- Open Graph -->
-  <meta property="og:title" content="KENZO SNACK — Snacks Naturales para Perros" />
+  <meta property="og:title" content="Snack Paws — Snacks Naturales para Perros" />
   <meta property="og:description" content="Snacks deshidratados naturales. Sin conservadores. Puro amor en cada bocado." />
   <meta property="og:type" content="website" />
 
@@ -19,6 +19,10 @@
 
   <!-- Favicon emoji -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐾</text></svg>" />
+
+
+  <!-- En el <head> agregar: -->
+<script src="https://js.stripe.com/v3/"></script>
 
   <link rel="stylesheet" href="/css/style.css" />
 </head>
@@ -33,7 +37,7 @@
     <div class="nav-inner">
       <!-- Logo -->
       <a href="#inicio" class="nav-logo" aria-label="Snack Paws - Inicio">
-        <div class="nav-logo-icon" aria-hidden="true"><img src="images/Logo.PNG"></div>
+        <div class="nav-logo-icon" aria-hidden="true">🐾</div>
         <span class="nav-logo-text">KENZO SNACK</span>
       </a>
 
@@ -361,8 +365,8 @@
       <span class="cart-subtotal-label">Total del pedido</span>
       <span class="cart-subtotal-amount" id="cartSubtotal">$0.00 MXN</span>
     </div>
-    <button class="checkout-btn" id="checkoutBtn" aria-label="Proceder al pago">
-      <span>Pedir Ahora</span>
+    <button class="checkout-btn" id="checkoutBtn" aria-label="Proceder al pago con Mercado Pago">
+      <span>🏦 Pagar con Mercado Pago</span>
       <span>→</span>
     </button>
   </div>
@@ -389,86 +393,87 @@
         </div>
 
         <!-- Form -->
-        <form id="orderForm" novalidate aria-label="Formulario de datos de contacto">
-          <div class="form-row">
-            <div class="form-group">
-              <label class="form-label" for="customerName">Nombre completo *</label>
-              <input
-                type="text"
-                id="customerName"
-                class="form-input"
-                placeholder="Tu nombre"
-                required
-                autocomplete="name"
-              />
-            </div>
-            <div class="form-group">
-              <label class="form-label" for="customerPhone">Teléfono / WhatsApp *</label>
-              <input
-                type="tel"
-                id="customerPhone"
-                class="form-input"
-                placeholder="55 1234 5678"
-                required
-                autocomplete="tel"
-              />
-            </div>
-          </div>
+        <!-- Reemplaza el contenido del form#orderForm -->
 
+        <!-- Datos del cliente -->
+        <div class="form-row">
           <div class="form-group">
-            <label class="form-label" for="customerEmail">Correo electrónico *</label>
-            <input
-              type="email"
-              id="customerEmail"
-              class="form-input"
-              placeholder="tuemail@ejemplo.com"
-              required
-              autocomplete="email"
-            />
+            <label class="form-label">Nombre completo *</label>
+            <input type="text" id="customerName" class="form-input" required autocomplete="name" />
           </div>
-
           <div class="form-group">
-            <label class="form-label" for="orderNotes">Notas del pedido (opcional)</label>
-            <textarea
-              id="orderNotes"
-              class="form-textarea"
-              placeholder="Instrucciones especiales, preferencias de entrega, raza y tamaño de tu perro..."
-            ></textarea>
+            <label class="form-label">Teléfono / WhatsApp *</label>
+            <input type="tel" id="customerPhone" class="form-input" required autocomplete="tel" />
           </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Dirección de entrega *</label>
+          <input type="text" id="customerAddress" class="form-input" placeholder="Calle, número, colonia, CP" required />
+        </div>
 
-          <p style="font-size:12px;color:var(--brown-light);margin-bottom:16px;line-height:1.5;">
-            🔒 Tus datos son seguros. Al enviar recibirás un correo de confirmación y nos pondremos en contacto contigo para coordinar la entrega.
-          </p>
-
-          <div style="display:flex;gap:12px;justify-content:flex-end;margin-bottom:8px;">
-            <button type="button" id="closeModal" class="btn-outline" style="font-size:14px;padding:12px 24px;color:var(--brown-mid);border-color:var(--cream);">
-              Cancelar
-            </button>
-            <button type="submit" class="submit-btn" id="submitBtn" style="flex:1;">
-              <span>🛒</span> Confirmar Pedido
-            </button>
+        <!-- Datos de la mascota -->
+        <div style="margin:16px 0 8px;font-size:12px;font-weight:700;color:var(--brown-mid);letter-spacing:1px;text-transform:uppercase;">🐾 Tu Perrito</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Nombre del perro *</label>
+            <input type="text" id="petName" class="form-input" placeholder="Rex, Luna..." required />
           </div>
-        </form>
+          <div class="form-group">
+            <label class="form-label">Raza</label>
+            <input type="text" id="petBreed" class="form-input" placeholder="Labrador, Poodle..." />
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Tamaño</label>
+          <select id="petSize" class="form-input">
+            <option value="">Seleccionar...</option>
+            <option value="pequeño">Pequeño (hasta 10kg)</option>
+            <option value="mediano">Mediano (10–25kg)</option>
+            <option value="grande">Grande (más de 25kg)</option>
+          </select>
+        </div>
+
+        <!-- Pago con Stripe -->
+        <div style="margin:16px 0 8px;font-size:12px;font-weight:700;color:var(--brown-mid);letter-spacing:1px;text-transform:uppercase;">💳 Datos de Pago</div>
+        <div class="form-group">
+          <label class="form-label">Número de tarjeta</label>
+          <div id="stripe-card-element" class="form-input" style="padding:14px 18px;"></div>
+          <div id="stripe-card-errors" style="color:#e53e3e;font-size:12px;margin-top:6px;"></div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Notas del pedido (opcional)</label>
+          <textarea id="orderNotes" class="form-textarea" placeholder="Instrucciones especiales..."></textarea>
+        </div>
       </div>
     </div>
 
-    <!-- Success Screen -->
-    <div id="successScreen" style="display:none;" class="modal-body">
+    <!-- Redirecting Screen (shown before MP redirect) -->
+    <div id="redirectingScreen" style="display:none;" class="modal-body">
       <div class="success-screen">
-        <span class="success-emoji">🎉</span>
-        <h2 class="success-title">¡Pedido recibido!</h2>
+        <span class="success-emoji" style="animation:none;font-size:56px;">🏦</span>
+        <h2 class="success-title">Redirigiendo a Mercado Pago...</h2>
         <p class="success-text">
-          Gracias por tu confianza. Revisa tu correo electrónico para ver la confirmación de tu pedido.<br><br>
-          Nos pondremos en contacto contigo a la brevedad para coordinar la entrega. 🐾
+          En un momento serás enviado de forma segura al checkout de Mercado Pago para completar tu pago.<br><br>
+          <strong style="color:var(--brown);">No cierres esta ventana. 🐾</strong>
         </p>
-        <button class="btn-primary" id="successCloseBtn" style="margin:0 auto;">
-          ¡Perfecto! Seguir comprando
-        </button>
+        <div style="display:flex;justify-content:center;gap:8px;margin-top:8px;">
+          <span style="width:10px;height:10px;border-radius:50%;background:var(--gold);animation:dotPulse 1.2s ease infinite;display:inline-block;"></span>
+          <span style="width:10px;height:10px;border-radius:50%;background:var(--gold);animation:dotPulse 1.2s ease .4s infinite;display:inline-block;"></span>
+          <span style="width:10px;height:10px;border-radius:50%;background:var(--gold);animation:dotPulse 1.2s ease .8s infinite;display:inline-block;"></span>
+        </div>
       </div>
     </div>
   </div>
 </div>
 
+<!-- ── Three.js ── -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<!-- ── VanillaTilt ── -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.0/vanilla-tilt.min.js"></script>
+<!-- ── Script principal existente ── -->
 <script src="/js/script.js"></script>
+<!-- ── Script 3D (nuevo) ── -->
+<script src="/js/script-3d.js"></script>
 </body>
 </html>

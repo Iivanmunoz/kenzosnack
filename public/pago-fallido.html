@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pago No Completado — Snack Paws 🐾</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐾</text></svg>"/>
+  <style>
+    :root { --cream:#f6ebcb; --gold:#e4bf65; --ivory:#fcf8ee; --brown:#3c1a0c; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'DM Sans', sans-serif; background: var(--ivory);
+      min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 24px;
+    }
+    .card {
+      background: #fff; border-radius: 24px; padding: 56px 48px; max-width: 480px; width: 100%;
+      text-align: center; box-shadow: 0 24px 64px rgba(60,26,12,.15); border: 1px solid rgba(228,191,101,.2);
+    }
+    .icon { font-size: 80px; display: block; margin-bottom: 20px; }
+    h1 { font-family: 'Playfair Display', serif; font-size: 32px; color: var(--brown); margin-bottom: 12px; }
+    p { color: #6b4226; line-height: 1.7; margin-bottom: 20px; font-size: 15px; }
+    .badge {
+      background: #f8d7da; border: 1px solid #f5c6cb; color: #721c24;
+      padding: 10px 20px; border-radius: 50px; font-weight: 600; font-size: 14px;
+      display: inline-block; margin-bottom: 28px;
+    }
+    .reasons {
+      background: var(--cream); border-radius: 12px; padding: 16px 20px;
+      margin-bottom: 28px; text-align: left;
+    }
+    .reasons p { margin: 6px 0; font-size: 14px; color: var(--brown); }
+    .btn-group { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    a.btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--brown); color: var(--gold); text-decoration: none;
+      font-weight: 700; font-size: 15px; padding: 14px 28px;
+      border-radius: 50px; transition: all .3s;
+    }
+    a.btn-primary:hover { background: #5a2710; transform: translateY(-2px); }
+    a.btn-secondary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: transparent; color: var(--brown); text-decoration: none;
+      font-weight: 600; font-size: 14px; padding: 14px 24px;
+      border-radius: 50px; border: 1.5px solid var(--cream); transition: all .3s;
+    }
+    a.btn-secondary:hover { border-color: var(--brown); }
+    .footer-note { font-size: 12px; color: #aaa; margin-top: 24px; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <span class="icon">😕</span>
+    <div class="badge">❌ Pago no completado</div>
+    <h1>Algo salió mal</h1>
+    <p>
+      Tu pago no pudo procesarse en esta ocasión. No te preocupes, ¡tu carrito sigue guardado y puedes intentarlo de nuevo!
+    </p>
+
+    <div class="reasons">
+      <p><strong>Posibles razones:</strong></p>
+      <p>• Fondos insuficientes en la tarjeta</p>
+      <p>• Datos de la tarjeta incorrectos</p>
+      <p>• El banco bloqueó la transacción</p>
+      <p>• Cancelaste el proceso de pago</p>
+    </div>
+
+    <p>Si el problema persiste, puedes contactarnos directamente por WhatsApp:</p>
+
+    <div class="btn-group">
+      <a href="/" class="btn-primary">🔄 Intentar de nuevo</a>
+      <a href="https://wa.me/5512345678" class="btn-secondary" target="_blank" rel="noopener">💬 WhatsApp</a>
+    </div>
+
+    <p class="footer-note">Snack Paws — Amor natural en cada bocado 🐾</p>
+  </div>
+</body>
+</html>

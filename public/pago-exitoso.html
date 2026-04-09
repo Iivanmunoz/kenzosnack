@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>¡Pago Exitoso! — Snack Paws 🐾</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐾</text></svg>"/>
+  <style>
+    :root {
+      --cream: #f6ebcb; --gold: #e4bf65; --ivory: #fcf8ee; --brown: #3c1a0c;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--ivory);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .card {
+      background: #fff;
+      border-radius: 24px;
+      padding: 56px 48px;
+      max-width: 480px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 24px 64px rgba(60,26,12,.15);
+      border: 1px solid rgba(228,191,101,.2);
+    }
+    .icon { font-size: 80px; display: block; margin-bottom: 20px; animation: pop .6s cubic-bezier(.34,1.56,.64,1); }
+    @keyframes pop { from { transform: scale(0); } to { transform: scale(1); } }
+    h1 { font-family: 'Playfair Display', serif; font-size: 32px; color: var(--brown); margin-bottom: 12px; }
+    p { color: #6b4226; line-height: 1.7; margin-bottom: 24px; font-size: 15px; }
+    .badge {
+      background: #d4edda; border: 1px solid #c3e6cb; color: #155724;
+      padding: 10px 20px; border-radius: 50px; font-weight: 600; font-size: 14px;
+      display: inline-block; margin-bottom: 28px;
+    }
+    .details {
+      background: var(--cream); border-radius: 12px; padding: 16px 20px;
+      margin-bottom: 28px; text-align: left;
+    }
+    .details p { margin: 4px 0; font-size: 13px; color: var(--brown); }
+    a.btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--brown); color: var(--gold); text-decoration: none;
+      font-weight: 700; font-size: 15px; padding: 14px 32px;
+      border-radius: 50px; transition: all .3s;
+    }
+    a.btn:hover { background: #5a2710; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(60,26,12,.25); }
+    .footer-note { font-size: 12px; color: #aaa; margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <span class="icon">🎉</span>
+    <div class="badge">✅ Pago aprobado por Mercado Pago</div>
+    <h1>¡Gracias por tu compra!</h1>
+    <p>
+      Tu pago fue procesado exitosamente. Te hemos enviado un correo de confirmación con el detalle de tu pedido.
+    </p>
+
+    <div class="details" id="paymentDetails">
+      <p id="mpPaymentId"></p>
+      <p id="mpStatus"></p>
+    </div>
+
+    <p>Nos pondremos en contacto contigo muy pronto para coordinar la entrega. 🐾</p>
+
+    <a href="/" class="btn">← Seguir comprando</a>
+
+    <p class="footer-note">Snack Paws — Amor natural en cada bocado</p>
+  </div>
+
+  <script>
+    // Leer parámetros que MP añade a la URL
+    const params = new URLSearchParams(window.location.search);
+    const paymentId = params.get('payment_id');
+    const status    = params.get('status');
+    const extRef    = params.get('external_reference');
+
+    const detailsEl = document.getElementById('paymentDetails');
+    if (paymentId || status) {
+      document.getElementById('mpPaymentId').textContent = paymentId ? `🔖 ID de pago: #${paymentId}` : '';
+      document.getElementById('mpStatus').textContent    = status    ? `✅ Estado: ${status}` : '';
+    } else {
+      detailsEl.style.display = 'none';
+    }
+  </script>
+</body>
+</html>

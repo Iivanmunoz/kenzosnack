@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KENZO SNACK 🐾 — Acceder</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐾</text></svg>" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    :root{--brown:#3c1a0c;--gold:#e4bf65;--ivory:#fcf8ee;--cream:#f6ebcb;--gold-light:#f0d88a}
+    body{background:#120604;overflow:hidden;font-family:'DM Sans',sans-serif}
+    #bg-canvas{position:fixed;inset:0;z-index:0}
+
+    .login-wrap{position:relative;z-index:10;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px}
+
+    .login-logo{text-align:center;margin-bottom:32px;animation:fadeDown .8s ease}
+    .login-logo-icon{font-size:56px;display:block;margin-bottom:8px;filter:drop-shadow(0 0 24px rgba(228,191,101,.6));animation:float 3s ease-in-out infinite}
+    .login-logo-text{font-family:'Playfair Display',serif;font-size:28px;font-weight:900;color:var(--gold);letter-spacing:3px;text-shadow:0 0 40px rgba(228,191,101,.5)}
+    .login-logo-sub{color:rgba(246,235,203,.4);font-size:11px;margin-top:6px;letter-spacing:3px;text-transform:uppercase}
+
+    .login-card{width:100%;max-width:440px;background:rgba(30,10,4,.65);backdrop-filter:blur(28px) saturate(160%);-webkit-backdrop-filter:blur(28px) saturate(160%);border:1px solid rgba(228,191,101,.18);border-radius:24px;padding:40px;box-shadow:0 32px 80px rgba(0,0,0,.6),0 0 0 1px rgba(228,191,101,.05),inset 0 1px 0 rgba(228,191,101,.12);animation:fadeUp .8s ease .1s both}
+
+    .tabs{display:flex;gap:4px;background:rgba(0,0,0,.35);border-radius:12px;padding:4px;margin-bottom:32px}
+    .tab-btn{flex:1;padding:10px;border:none;border-radius:9px;background:transparent;color:rgba(246,235,203,.45);font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;cursor:pointer;transition:all .3s ease}
+    .tab-btn.active{background:linear-gradient(135deg,var(--gold),var(--gold-light));color:var(--brown);box-shadow:0 4px 16px rgba(228,191,101,.3)}
+
+    .form-panel{display:none}
+    .form-panel.active{display:block;animation:fadeIn .3s ease}
+
+    .form-title{font-family:'Playfair Display',serif;font-size:22px;color:var(--ivory);margin-bottom:6px}
+    .form-sub{font-size:13px;color:rgba(246,235,203,.45);margin-bottom:28px;line-height:1.6}
+    .form-label{display:block;font-size:11px;font-weight:600;color:var(--cream);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px}
+    .form-input{width:100%;padding:14px 18px;background:rgba(0,0,0,.3);border:1px solid rgba(228,191,101,.15);border-radius:12px;color:var(--ivory);font-family:'DM Sans',sans-serif;font-size:15px;transition:all .3s ease;outline:none;margin-bottom:20px}
+    .form-input:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(228,191,101,.12);background:rgba(0,0,0,.4)}
+    .form-input::placeholder{color:rgba(246,235,203,.25)}
+
+    .submit-btn{width:100%;padding:16px;background:linear-gradient(135deg,var(--gold),var(--gold-light));border:none;border-radius:12px;color:var(--brown);font-family:'DM Sans',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:all .3s ease;letter-spacing:.5px;box-shadow:0 8px 24px rgba(228,191,101,.3)}
+    .submit-btn:hover{transform:translateY(-2px);box-shadow:0 16px 36px rgba(228,191,101,.4)}
+    .submit-btn:active{transform:translateY(0)}
+    .submit-btn.loading{opacity:.7;pointer-events:none}
+
+    .error-msg{color:#ff7875;font-size:13px;margin-bottom:16px;padding:10px 14px;background:rgba(255,120,117,.08);border-radius:8px;border:1px solid rgba(255,120,117,.2);display:none}
+    .error-msg.show{display:block;animation:shake .3s ease}
+
+    .back-link{display:block;text-align:center;margin-top:20px;font-size:13px;color:rgba(246,235,203,.35);text-decoration:none;transition:color .3s}
+    .back-link:hover{color:var(--gold)}
+
+    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+    @keyframes fadeDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+    @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
+  </style>
+</head>
+<body>
+<canvas id="bg-canvas"></canvas>
+
+<div class="login-wrap">
+  <div class="login-logo">
+    <span class="login-logo-icon">🐾</span>
+    <div class="login-logo-text">KENZO SNACK</div>
+    <div class="login-logo-sub">Snacks Naturales para Perros</div>
+  </div>
+
+  <div class="login-card">
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="login">Iniciar Sesión</button>
+      <button class="tab-btn" data-tab="register">Registrarse</button>
+    </div>
+
+    <!-- Login -->
+    <div class="form-panel active" id="panel-login">
+      <h2 class="form-title">Bienvenido de nuevo</h2>
+      <p class="form-sub">Accede a tu cuenta para ver pedidos o administrar la tienda.</p>
+      <div class="error-msg" id="login-error"></div>
+      <label class="form-label" for="login-email">Correo electrónico</label>
+      <input type="email" id="login-email" class="form-input" placeholder="tuemail@ejemplo.com" />
+      <label class="form-label" for="login-pass">Contraseña</label>
+      <input type="password" id="login-pass" class="form-input" placeholder="••••••••" />
+      <button class="submit-btn" id="login-btn">Entrar →</button>
+    </div>
+
+    <!-- Register -->
+    <div class="form-panel" id="panel-register">
+      <h2 class="form-title">Crear cuenta</h2>
+      <p class="form-sub">Guarda tu historial de pedidos y recibe ofertas exclusivas.</p>
+      <div class="error-msg" id="reg-error"></div>
+      <label class="form-label" for="reg-name">Nombre completo</label>
+      <input type="text" id="reg-name" class="form-input" placeholder="Tu nombre" />
+      <label class="form-label" for="reg-email">Correo electrónico</label>
+      <input type="email" id="reg-email" class="form-input" placeholder="tuemail@ejemplo.com" />
+      <label class="form-label" for="reg-pass">Contraseña</label>
+      <input type="password" id="reg-pass" class="form-input" placeholder="Mínimo 6 caracteres" />
+      <button class="submit-btn" id="reg-btn">Crear cuenta →</button>
+    </div>
+
+    <a href="/" class="back-link">← Volver a la tienda</a>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+/* ── Three.js Background ── */
+const canvas = document.getElementById('bg-canvas');
+const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.setSize(innerWidth, innerHeight);
+renderer.setClearColor(0x120604, 1);
+
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(75, innerWidth / innerHeight, 0.1, 1000);
+camera.position.z = 5;
+
+scene.add(new THREE.AmbientLight(0xe4bf65, 0.4));
+const pt = new THREE.PointLight(0xf0d88a, 2, 20);
+pt.position.set(2, 4, 3);
+scene.add(pt);
+
+// Particles
+const pCount = 400, pGeo = new THREE.BufferGeometry();
+const pos = new Float32Array(pCount * 3);
+for (let i = 0; i < pCount; i++) {
+  pos[i*3]   = (Math.random()-.5)*22;
+  pos[i*3+1] = (Math.random()-.5)*22;
+  pos[i*3+2] = (Math.random()-.5)*12;
+}
+pGeo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+const particles = new THREE.Points(pGeo, new THREE.PointsMaterial({ color: 0xe4bf65, size: 0.055, transparent: true, opacity: 0.55, sizeAttenuation: true }));
+scene.add(particles);
+
+// Wireframe rings
+const addRing = (r, tube, color, op) => {
+  const m = new THREE.Mesh(new THREE.TorusGeometry(r, tube, 8, 80), new THREE.MeshBasicMaterial({ color, wireframe: true, transparent: true, opacity: op }));
+  scene.add(m); return m;
+};
+const ring1 = addRing(2.0, 0.04, 0xe4bf65, 0.09);
+const ring2 = addRing(3.2, 0.03, 0xc9a340, 0.06);
+const ring3 = addRing(1.1, 0.035, 0xf0d88a, 0.07);
+
+// Icosahedron
+const ico = new THREE.Mesh(
+  new THREE.IcosahedronGeometry(1.2, 1),
+  new THREE.MeshBasicMaterial({ color: 0xe4bf65, wireframe: true, transparent: true, opacity: 0.06 })
+);
+scene.add(ico);
+
+let mx = 0, my = 0;
+document.addEventListener('mousemove', e => { mx = (e.clientX/innerWidth-.5)*2; my = -(e.clientY/innerHeight-.5)*2; });
+window.addEventListener('resize', () => { camera.aspect = innerWidth/innerHeight; camera.updateProjectionMatrix(); renderer.setSize(innerWidth,innerHeight); });
+
+const clock = new THREE.Clock();
+(function animate() {
+  requestAnimationFrame(animate);
+  const t = clock.getElapsedTime();
+  particles.rotation.y = t * 0.025; particles.rotation.x = t * 0.008;
+  ring1.rotation.x = t * 0.18; ring1.rotation.y = t * 0.09;
+  ring2.rotation.y = -t * 0.12; ring2.rotation.z = t * 0.06;
+  ring3.rotation.x = -t * 0.22; ring3.rotation.z = t * 0.15;
+  ico.rotation.y = t * 0.08; ico.rotation.x = t * 0.05;
+  camera.position.x += (mx * 0.25 - camera.position.x) * 0.05;
+  camera.position.y += (my * 0.25 - camera.position.y) * 0.05;
+  renderer.render(scene, camera);
+})();
+
+/* ── Tabs ── */
+document.querySelectorAll('.tab-btn').forEach(btn =>
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tab-btn,.form-panel').forEach(el => el.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('panel-'+btn.dataset.tab).classList.add('active');
+  })
+);
+
+/* ── Login ── */
+document.getElementById('login-btn').addEventListener('click', async () => {
+  const email = document.getElementById('login-email').value.trim();
+  const pass  = document.getElementById('login-pass').value;
+  const err   = document.getElementById('login-error');
+  err.classList.remove('show');
+  if (!email || !pass) { err.textContent = 'Por favor llena todos los campos.'; err.classList.add('show'); return; }
+  const btn = document.getElementById('login-btn');
+  btn.textContent = 'Verificando...'; btn.classList.add('loading');
+  try {
+    const res = await fetch('/api/auth/login', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({email, password: pass}) });
+    const data = await res.json();
+    if (!res.ok) { err.textContent = data.error || 'Credenciales incorrectas.'; err.classList.add('show'); return; }
+    localStorage.setItem('kenzo_token', data.token);
+    localStorage.setItem('kenzo_user', JSON.stringify(data.user));
+    window.location.href = data.user.role === 'admin' ? '/dashboard.html' : '/';
+  } catch { err.textContent = 'Error de conexión.'; err.classList.add('show'); }
+  finally { btn.textContent = 'Entrar →'; btn.classList.remove('loading'); }
+});
+
+/* ── Register ── */
+document.getElementById('reg-btn').addEventListener('click', async () => {
+  const name  = document.getElementById('reg-name').value.trim();
+  const email = document.getElementById('reg-email').value.trim();
+  const pass  = document.getElementById('reg-pass').value;
+  const err   = document.getElementById('reg-error');
+  err.classList.remove('show');
+  if (!name||!email||!pass) { err.textContent = 'Por favor llena todos los campos.'; err.classList.add('show'); return; }
+  if (pass.length < 6) { err.textContent = 'La contraseña debe tener al menos 6 caracteres.'; err.classList.add('show'); return; }
+  const btn = document.getElementById('reg-btn');
+  btn.textContent = 'Creando cuenta...'; btn.classList.add('loading');
+  try {
+    const res = await fetch('/api/auth/register', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({name,email,password:pass}) });
+    const data = await res.json();
+    if (!res.ok) { err.textContent = data.error || 'Error al registrarse.'; err.classList.add('show'); return; }
+    localStorage.setItem('kenzo_token', data.token);
+    localStorage.setItem('kenzo_user', JSON.stringify(data.user));
+    window.location.href = '/';
+  } catch { err.textContent = 'Error de conexión.'; err.classList.add('show'); }
+  finally { btn.textContent = 'Crear cuenta →'; btn.classList.remove('loading'); }
+});
+
+/* ── Enter key support ── */
+document.addEventListener('keydown', e => {
+  if (e.key !== 'Enter') return;
+  const active = document.querySelector('.form-panel.active');
+  if (active.id === 'panel-login') document.getElementById('login-btn').click();
+  else document.getElementById('reg-btn').click();
+});
+</script>
+</body>
+</html>

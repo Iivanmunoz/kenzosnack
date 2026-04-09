@@ -117,19 +117,15 @@ p { line-height: 1.7; }
 .nav-logo-icon {
   width: 42px;
   height: 42px;
+  background: var(--brown);
   border-radius: 50%;
-  overflow: hidden; /* Para que la imagen respete el border-radius */
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 20px;
   transition: transform .3s ease;
 }
 
-.nav-logo-icon img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* Ajusta la imagen al contenedor */
-}
 .nav-logo:hover .nav-logo-icon { transform: rotate(-10deg) scale(1.1); }
 
 .nav-logo-text {
@@ -1624,4 +1620,248 @@ footer {
   .hero { padding: 120px 0 80px; }
   .products-section, .features-section, .location-section, .testimonials-section { padding: 64px 0; }
   .section-header { margin-bottom: 40px; }
+}
+
+/* ─── Mercado Pago additions ────────────────────────────────── */
+@keyframes dotPulse {
+  0%, 100% { opacity: .3; transform: scale(.8); }
+  50%       { opacity: 1;  transform: scale(1.2); }
+}
+
+.submit-btn.mp-btn {
+  background: #009ee3;
+  color: #fff;
+}
+.submit-btn.mp-btn:hover:not(:disabled) {
+  background: #0077b6;
+  color: #fff;
+  box-shadow: 0 8px 24px rgba(0,158,227,.35);
+}
+
+/* ============================================================
+   KENZO SNACK — Estilos 3D Adicionales
+   Importar DESPUÉS de style.css:
+   <link rel="stylesheet" href="/css/style-3d.css" />
+   ============================================================ */
+
+/* ── Three.js Hero Canvas ────────────────────────────────── */
+#hero-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.hero {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero .container,
+.hero-visual,
+.hero-scroll,
+.hero-blob,
+.hero-paws {
+  position: relative;
+  z-index: 2;
+}
+
+/* ── VanillaTilt Product Cards ───────────────────────────── */
+.product-card {
+  transform-style: preserve-3d;
+  transform: perspective(1000px);
+  transition: box-shadow .3s ease !important;
+  will-change: transform;
+}
+
+.product-card:hover {
+  box-shadow: 0 32px 80px rgba(60,26,12,.22),
+              0 0 60px rgba(228,191,101,.12) !important;
+}
+
+/* Glare effect overlay — VanillaTilt injects this */
+.product-card .js-tilt-glare {
+  border-radius: var(--radius);
+}
+
+/* ── 3D Feature Cards ────────────────────────────────────── */
+.feature-card {
+  transform-style: preserve-3d;
+  transition: transform .4s ease, box-shadow .4s ease !important;
+  cursor: default;
+}
+.feature-card:hover {
+  transform: translateY(-8px) rotateX(4deg) !important;
+  box-shadow: 0 28px 60px rgba(0,0,0,.35), 0 0 40px rgba(228,191,101,.1) !important;
+}
+
+/* ── Floating 3D Hero Card Enhancement ──────────────────── */
+.hero-visual-card {
+  transform-style: preserve-3d;
+  animation: heroCardFloat 4s ease-in-out infinite !important;
+  box-shadow: 0 24px 64px rgba(60,26,12,.3),
+              0 0 0 1px rgba(228,191,101,.15),
+              0 0 60px rgba(228,191,101,.08);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+@keyframes heroCardFloat {
+  0%,100% { transform: translateY(0) rotateX(0deg) rotateY(0deg); }
+  25%     { transform: translateY(-16px) rotateX(4deg) rotateY(-3deg); }
+  50%     { transform: translateY(-8px) rotateX(-2deg) rotateY(4deg); }
+  75%     { transform: translateY(-20px) rotateX(3deg) rotateY(2deg); }
+}
+
+/* ── Navbar Login Button ─────────────────────────────────── */
+.nav-auth-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  background: linear-gradient(135deg, var(--gold), var(--gold-light));
+  border: none;
+  border-radius: 10px;
+  color: var(--brown);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all .3s ease;
+  box-shadow: 0 4px 16px rgba(228,191,101,.25);
+  position: relative;
+  overflow: hidden;
+}
+.nav-auth-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,.15), transparent);
+  opacity: 0;
+  transition: opacity .3s;
+}
+.nav-auth-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(228,191,101,.35);
+}
+.nav-auth-btn:hover::before { opacity: 1; }
+
+/* User dropdown */
+.nav-user-menu {
+  position: relative;
+  display: inline-block;
+}
+.nav-user-trigger {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  background: rgba(228,191,101,.1);
+  border: 1px solid rgba(228,191,101,.2);
+  border-radius: 10px;
+  color: var(--brown);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all .3s ease;
+}
+.nav-user-trigger:hover {
+  background: rgba(228,191,101,.18);
+}
+.nav-user-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold), var(--gold-light));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+}
+.nav-dropdown {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  background: rgba(252,248,238,.96);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(228,191,101,.2);
+  border-radius: 14px;
+  min-width: 180px;
+  box-shadow: 0 16px 48px rgba(60,26,12,.15);
+  overflow: hidden;
+  display: none;
+  z-index: 200;
+  animation: dropDown .2s ease;
+}
+.nav-dropdown.open { display: block; }
+@keyframes dropDown {
+  from { opacity:0; transform:translateY(-8px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+.nav-dropdown a,
+.nav-dropdown button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 12px 16px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  color: var(--brown);
+  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: background .2s;
+  text-align: left;
+}
+.nav-dropdown a:hover,
+.nav-dropdown button:hover {
+  background: rgba(228,191,101,.12);
+}
+.nav-dropdown .drop-divider {
+  height: 1px;
+  background: rgba(228,191,101,.2);
+  margin: 4px 0;
+}
+
+/* ── Stats Bar 3D Numbers ────────────────────────────────── */
+.stat-number {
+  text-shadow: 0 4px 16px rgba(228,191,101,.3);
+}
+
+/* ── Parallax Section BG ─────────────────────────────────── */
+.hero {
+  background: linear-gradient(160deg,
+    #3c1a0c 0%,
+    #5c2d14 40%,
+    #3c1a0c 100%
+  );
+}
+
+/* ── 3D Scroll line animation ────────────────────────────── */
+.scroll-line {
+  background: linear-gradient(180deg, var(--gold) 0%, transparent 100%) !important;
+  box-shadow: 0 0 8px rgba(228,191,101,.4);
+}
+
+/* ── Glassmorphism on product cards (enhanced) ───────────── */
+.product-card {
+  background: rgba(252,248,238,.7) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(228,191,101,.15) !important;
+}
+
+/* ── Ambient glow behind section headings ────────────────── */
+.section-title span {
+  text-shadow: 0 0 30px rgba(228,191,101,.3);
+}
+
+/* ── Responsive ──────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .nav-auth-btn span:not(:first-child) { display: none; }
 }
