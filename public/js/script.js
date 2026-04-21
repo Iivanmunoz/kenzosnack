@@ -437,8 +437,7 @@ orderForm?.addEventListener('submit', async (e) => {
       body: JSON.stringify({
         paymentMethodId: paymentMethod.id,
         customerName, customerEmail: user.email, customerPhone,
-        customerAddress: document.getElementById('customerAddress').value,
-        petName: document.getElementById('petName').value,
+        customerAddress: `${document.getElementById('customerAddress').value}, ${document.getElementById('customerDelegacion').value}, CP ${document.getElementById('customerCP').value}`, petName: document.getElementById('petName').value,
         petBreed: document.getElementById('petBreed').value,
         petSize: document.getElementById('petSize').value,
         notes: document.getElementById('orderNotes').value,
